@@ -1,5 +1,7 @@
-#include "cbuiltindlg.h"
+#include "cbuiltindig.h"
 #include <QGridLayout>
+#include <QColorDialog>
+#include <QPalette>
 
 CBuiltinDig::CBuiltinDig(QWidget *parent)
     : QDialog(parent)
@@ -26,7 +28,43 @@ CBuiltinDig::CBuiltinDig(QWidget *parent)
     gridLayout->addWidget(printPushBtn,    2, 1);
     gridLayout->addWidget(displayTextEdit, 3, 0, 1, 3);
 
-    setLayout(gridLayout);
     setWindowTitle(QStringLiteral("內建對話盒展示"));
     resize(400, 300);
+
+    // 連線按鈕
+    connect(colorPushBtn,    &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+    connect(errorPushBtn,    &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+    connect(filePushBtn,     &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+    connect(fontPushBtn,     &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+    connect(inputPushBtn,    &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+    connect(pagePushBtn,     &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+    connect(progressPushBtn, &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+    connect(printPushBtn,    &QPushButton::clicked, this, &CBuiltinDig::doPushBtn);
+}
+
+void CBuiltinDig::doPushBtn()
+{
+    QPushButton* btn = qobject_cast<QPushButton*>(sender());
+    if (btn == colorPushBtn)
+    {
+        QPalette palette = displayTextEdit->palette();
+        const QColor &color = QColorDialog::getColor(
+            palette.color(QPalette::Base),
+            this,
+            QStringLiteral("設定背景顏色")
+            );
+        if(color.isValid())
+        {
+            palette.setColor(QPalette::Base, color);
+            displayTextEdit->setPalette(palette);
+        }
+    }
+    else
+    {
+        displayTextEdit->append(QStringLiteral("按下了：") + btn->text());
+    }
+}
+
+CBuiltinDig::~CBuiltinDig()
+{
 }

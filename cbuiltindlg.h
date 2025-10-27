@@ -11,6 +11,10 @@ class CBuiltinDig : public QDialog
 
 public:
     explicit CBuiltinDig(QWidget *parent = nullptr);
+    ~CBuiltinDig();
+
+private slots:
+    void doPushBtn();
 
 private:
     QTextEdit   *displayTextEdit;
@@ -22,6 +26,7 @@ private:
     QPushButton *pagePushBtn;
     QPushButton *progressPushBtn;
     QPushButton *printPushBtn;
+
 };
 
 #endif // CBUILTINDIG_H
