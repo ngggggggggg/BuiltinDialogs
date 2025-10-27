@@ -1,32 +1,33 @@
-#ifndef CBUILTINDIG_H
-#define CBUILTINDIG_H
+#ifndef CBUILDINDLG_H
+#define CBUILDINDLG_H
 
 #include <QDialog>
-#include <QPushButton>
-#include <QTextEdit>
 
-class CBuiltinDig : public QDialog
+class QTextEdit;
+class QPushButton;
+
+class CBuildinDlg : public QDialog
 {
     Q_OBJECT
-
 public:
-    explicit CBuiltinDig(QWidget *parent = nullptr);
-    ~CBuiltinDig();
+    explicit CBuildinDlg(QWidget *parent = nullptr);
 
 private slots:
-    void doPushBtn();
+    void handleButtonClicked();
 
 private:
-    QTextEdit   *displayTextEdit;
-    QPushButton *colorPushBtn;
-    QPushButton *errorPushBtn;
-    QPushButton *filePushBtn;
-    QPushButton *fontPushBtn;
-    QPushButton *inputPushBtn;
-    QPushButton *pagePushBtn;
-    QPushButton *progressPushBtn;
-    QPushButton *printPushBtn;
+    void setupUI();
+    QTextEdit *textEdit;
 
+    QPushButton *colorBtn;
+    QPushButton *bgColorBtn;
+    QPushButton *errorBtn;
+    QPushButton *fileBtn;
+    QPushButton *fontBtn;
+    QPushButton *inputBtn;
+    QPushButton *pageBtn;
+    QPushButton *progressBtn;
+    QPushButton *printBtn;
 };
 
-#endif // CBUILTINDIG_H
+#endif // CBUILDINDLG_H
